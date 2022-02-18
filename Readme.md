@@ -1,3 +1,3 @@
 ### Placeholder for ArgoCD-GitOps Guestbooks
 - helm-backend-guestbook
-- coming soon!
+- helm-frontend-guestbook -- coming soon!

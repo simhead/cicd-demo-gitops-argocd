@@ -9,7 +9,7 @@ image:
   repository: "axwayaustralia/cicd-demo-backend"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "23"
+  tag: "1.1"
 
 imagePullSecrets: []
 nameOverride: ""
