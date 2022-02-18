@@ -49,7 +49,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: hello.apim.13.211.13.10.nip.io
+    - host: cicd.backend.apim.13.211.13.10.nip.io
       paths:
         - path: /
           pathType: ImplementationSpecific
