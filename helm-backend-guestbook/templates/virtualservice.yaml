@@ -24,7 +24,7 @@ spec:
 {{- end }}
       route:
       - destination:
-          host: {{ (print .Values.virtualservice.name "." .Release.Namespace ".svc.cluster.local") | quote }}
+          host: {{ (print {{ include "helloworld.fullname" . }} "." .Release.Namespace ".svc.cluster.local") | quote }}
           #subset: {{ (print "v" .Values.virtualservice.version) | quote }}
           port:
             number: {{ .Values.service.port }}
