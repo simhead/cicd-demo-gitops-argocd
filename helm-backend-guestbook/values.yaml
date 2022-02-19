@@ -6,10 +6,10 @@ replicaCount: 1
 dockerRepository: "docker.io"
 
 image:
-  repository: "axwayaustralia/cicd-demo-backend"
+  repository: "simhead/cicd-demo-backend"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "23"
+  tag: "26"
 
 imagePullSecrets: []
 nameOverride: ""
