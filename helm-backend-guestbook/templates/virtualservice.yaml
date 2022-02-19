@@ -35,3 +35,5 @@ spec:
 {{- else if .Values.virtualservice.overallTimeout }}
       timeout: {{ .Values.virtualservice.overallTimeout }}
 {{- end }}
+
+{{- end }}
