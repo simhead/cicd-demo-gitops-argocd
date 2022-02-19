@@ -60,6 +60,23 @@ ingress:
   #tls:
   #  - hosts: hello
 
+virtualservice:
+  enabled: true
+  name: cicd-demo-backend-vs
+  system: cicd-demo-backend
+# Configure the Istio ingress gateway to route outside traffic for the provided
+# host name to this service on the ports and protocols defined in the 'ports' section
+# above.
+istioGateway:
+  name: cicd-demo/istio-gateway
+  host: "*" #"lvh.me" # resolves to 127.0.0.1
+  matchPrefix:
+#    - "/productpage"
+#    - "/static"
+#    - "/login"
+#    - "/logout"
+    - "/istio"
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
