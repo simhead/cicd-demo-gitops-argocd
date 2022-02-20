@@ -6,10 +6,10 @@ replicaCount: 1
 dockerRepository: "docker.io"
 
 image:
-  repository: "axwayaustralia/cicd-demo-backend"
+  repository: "simhead/cicd-demo-frontend"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.1"
+  tag: "2"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -49,7 +49,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: cicd.backend.apim.13.211.13.10.nip.io
+    - host: cicd.frontend.apim.13.211.13.10.nip.io
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -59,6 +59,23 @@ ingress:
   #      - chart-example.local
   #tls:
   #  - hosts: hello
+
+virtualservice:
+  enabled: false
+  name: cicd-demo-frontend-vs
+  system: cicd-demo-frontend
+# Configure the Istio ingress gateway to route outside traffic for the provided
+# host name to this service on the ports and protocols defined in the 'ports' section
+# above.
+istioGateway:
+  name: cicd-demo/istio-gateway
+  host: "*" #"lvh.me" # resolves to 127.0.0.1
+  matchPrefix:
+    #    - "/productpage"
+    #    - "/static"
+    #    - "/login"
+    #    - "/logout"
+    - "/cicd"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

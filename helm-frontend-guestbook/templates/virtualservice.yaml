@@ -1,0 +1,39 @@
+{{- if .Values.virtualservice.enabled -}}
+{{- $fullName := include "helloworld.fullname" . -}}
+{{- $svcPort := .Values.virtualservice.port -}}
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Values.virtualservice.name | lower | quote }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.virtualservice.name | lower | quote }}
+    app.kubernetes.io/part-of: {{ .Values.virtualservice.system | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  gateways:
+    - {{ .Values.istioGateway.name | quote }}
+  hosts:
+    - {{ .Values.istioGateway.host | quote }}
+  http:
+    - match:
+{{- range .Values.istioGateway.matchPrefix }}
+      - uri:
+          prefix: {{ . | quote }}
+{{- end }}
+      route:
+      - destination:
+          host: {{ (print $fullName "." .Release.Namespace ".svc.cluster.local") | quote }}
+          #subset: {{ (print "v" .Values.virtualservice.version) | quote }}
+          port:
+            number: {{ .Values.service.port }}
+{{- if .Values.virtualservice.retries }}
+      retries:
+{{ toYaml .Values.virtualservice.retries | indent 8 }}
+      timeout: {{ required "You must specify an overall timeout to use retries" .Values.virtualservice.overallTimeout}}
+{{- else if .Values.virtualservice.overallTimeout }}
+      timeout: {{ .Values.virtualservice.overallTimeout }}
+{{- end }}
+
+{{- end }}
