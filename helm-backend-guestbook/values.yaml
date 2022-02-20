@@ -9,7 +9,7 @@ image:
   repository: "simhead/cicd-demo-backend"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "26"
+  tag: "35"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -75,7 +75,7 @@ istioGateway:
 #    - "/static"
 #    - "/login"
 #    - "/logout"
-    - "/istio"
+    - "/api/cicd"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
