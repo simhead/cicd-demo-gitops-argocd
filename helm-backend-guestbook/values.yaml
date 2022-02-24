@@ -9,7 +9,7 @@ image:
   repository: "simhead/cicd-demo-backend"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "42"
+  tag: "43"
 
 imagePullSecrets: []
 nameOverride: ""
